@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/openjdk:17.0  
+    steps:
+      - checkout
+      - run:
+          name: Instalar dependencias
+          command: mvn dependency:go-offline
+      - run:
+          name: Ejecutar pruebas
+          command: mvn test
+
+workflows:
+  version: 2
+  test-workflow:
+    jobs:
+      - test
